@@ -22,7 +22,7 @@ jobs:
     outputs:
       publish: ${{ steps.commit.outputs.changed == 'true' || github.event_name != 'schedule' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run the scraper
         run: |
           python3 scrape.py
@@ -43,7 +43,7 @@ jobs:
         run: |
           mkdir _site
           cp index.html natjecaji.json _site/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: steps.commit.outputs.changed == 'true' || github.event_name != 'schedule'
 
   deploy:
@@ -56,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
